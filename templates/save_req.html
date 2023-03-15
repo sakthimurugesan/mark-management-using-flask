@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .main{
+        position: relative;
+        top:25%;
+        left: 10%;
+        transform: translate(-50,-50);
+    }
+    table{
+        border: 5px solid black;
+        border-collapse: collapse;
+    }
+    td,th,input{
+        width: 200px;
+        height: 50px;
+        text-align:center;
+        font-size:20px;
+        color: white;
+    }
+    input{
+        width:96%;
+        height: 100%;
+    background-color:teal;
+    }
+    td{
+    background-color:teal;
+    }
+    th{
+    background-color:orangered;
+    color: white;
+    }
+    .sbtn1{
+        background-color: white;
+    }
+    a{
+        color:white;
+        text-decoration: none;
+    }
+    #btn-save{
+        padding :10px;
+        font-size: 18px;
+        width: 100px;
+        height: 40px;
+        background-color: darkblue;
+        color: white;
+        border-color: white;
+        border-radius: 5px;;
+    }
+    .btn-edit,.btn-del{
+        padding :10px;
+        font-size: 18px;
+        width: 100px;
+        height: 40px;
+        background-color: green;
+        color: white;
+        border-color: white;
+        border-radius: 5px;;
+    }
+    .inp-active{
+        background-color: orangered;
+    }
+    .btn-del{
+        background-color: red;
+    }
+</style>
+<body>
+    <div class="main">
+
+       <form action="{{url_for('save_edit',name=name)}}" method="POST">
+        <h1>USER-MANAGEMENT SOFTWARE</h1>
+
+        <table border="1">
+            <tr>
+                <th>Name</th>
+                <th>Maths</th>
+                <th>Chemistry</th>
+                <th>Physics</th>
+            </tr>
+            {% for i in datas %}
+
+            {% if i.Name!=name %}
+            <tr>
+                <td>{{i.Name}}</td>
+                <td>{{i.Maths}}</td>
+                <td>{{i.Chemistry}}</td>
+                <td>{{i.Physics}}</td>
+               <td class="sbtn1">
+                    <a href="{{url_for('save_req',name=i.Name)}}"><input type="button" class="btn-edit" value="EDIT" onclick=""></a>
+                </td>
+                <td class="sbtn1"><a href="{{url_for('del_rec',name=i.Name)}}"><input type="button" class="btn-del" value="DELETE" onclick=""></a></td>
+            </tr>
+            {% endif %}
+
+            {% if i.Name==name %}
+
+            <tr>
+                <td><input class="inp-active" type="text" name="Name" value="{{i.Name}}"></td>
+                <td><input class="inp-active" type="text" name="Maths" value="{{i.Maths}}"></td>
+                <td><input class="inp-active" type="text" name="Chemistry" value="{{i.Chemistry}}"></td>
+                <td><input class="inp-active" type="text" name="Physics" value="{{i.Physics}}"></td>
+               <td class="sbtn1"><input type="submit" id="btn-save" value="SAVE" onclick="">
+                </td>
+                <td class="sbtn1"><a href="{{url_for('del_rec',name=i.Name)}}"><input type="button" class="btn-del" value="DELETE" onclick=""></a></td>
+            </tr>
+            {% endif %}
+            
+            {% endfor %}
+            
+
+        </table>
+        </form>
+        
+        <a href="{{url_for('home')}}"><input type="button" class="btn-edit" value="Home" onclick=""></a>
+    </div>
+    
+</body>
+<script>
+
+
+</script>
+</html>
